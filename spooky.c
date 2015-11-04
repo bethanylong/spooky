@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#define ZOMBIE_SAFETY_LIMIT 100
+
 void make_zombie();
 
 int main(int argc, char **argv) {
@@ -14,6 +16,12 @@ int main(int argc, char **argv) {
         if (num_zombies_from_args > 0) {
             num_zombies = num_zombies_from_args;
         }
+    }
+
+    // Safety feature to prevent zombiebombing
+    if (num_zombies > ZOMBIE_SAFETY_LIMIT) {
+        printf("Engaging anti-zombiebomb safety feature\n");
+        num_zombies = ZOMBIE_SAFETY_LIMIT;
     }
 
     for (int i = 0; i < num_zombies; i++) {
